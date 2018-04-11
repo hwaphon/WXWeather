@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='weather-top'>
+    <view 
+      wx:if='{{ statusBarHeight > 0 }}'
+      class='weather-navigation'
+      style='margin-top: {{ statusBarHeight }}px'>
+      <text>{{ weatherInfo.city }}</text>
+      <view class='weather-city' bindtap='selectCity'>
+        <image src='{{ locationIcon }}' class='weather-location-icon'></image>
+      </view>
+    </view>
+    <view class='weather-info'>
+      <text class='info-wendu'>{{ weatherInfo.data.wendu }}</text>
+      <text class='info-type'>{{ weatherForecast[0].type }}</text>
+    </view>
+    <image src='{{ bg }}' mode='aspectFill' class='weather-bg'></image>
+  </view>
+  <view class='weather-list'>
+    <block wx:for='{{ weatherForecast }}' wx:key="index">
+      <weather-info info="{{ item }}"></weather-info>
+    </block>
+  </view>
+</view>

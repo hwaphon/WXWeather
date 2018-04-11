@@ -1,0 +1,48 @@
+/* components/weather-info.wxss */
+
+:host {
+  color: #606266;
+}
+.weather-info-item {
+  height: 98rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #EBEEF5;
+  line-height: 98rpx;
+  padding: 0px 24rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weather-info-more {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.weather-info-icon {
+  height: 48rpx;
+  width: 48rpx;
+  margin-right: 16rpx;
+}
+
+.weather-info-wendu {
+  width: 84rpx;
+  font-size: 34rpx;
+  text-align: center;
+}
+
+.weather-info-wendu::after {
+  content: "°";
+}
+
+.weather-info-indicator {
+  color: #C0C4CC;
+  font-size: 28rpx;
+}
+
+.weather-info-low {
+  color: #C0C4CC;
+}

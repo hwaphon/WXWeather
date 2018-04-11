@@ -1,0 +1,6 @@
+{
+  "navigationBarBackgroundColor": "#0b626f",
+  "usingComponents": {
+    "weather-info": "/components/weather-info"
+  }
+}
