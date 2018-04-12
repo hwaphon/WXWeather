@@ -15,23 +15,21 @@ function getLocation () {
   });
 }
 
-function getLocationName () {
-  return new Promise((resolve) => {
-    getLocation().then((res) => {
-      map.reverseGeocoder({
-        location: {
-          latitude: res.latitude,
-          longitude: res.longitude
-        },
-        success: function (result) {
-          resolve(result.result.address_component.city)
-        }
-      });
-    })
+function getLocationLngLat (address) {
+  return new Promise((resolve, reject) => {
+    map.geocoder({
+      address: address,
+      success: function (res) {
+        resolve(res);
+      },
+      fall: function (res) {
+        reject(res);
+      }
+    });    
   });
 }
 
 module.exports = {
-  getLocation: getLocation,
-  getLocationName: getLocationName
+  getLocation,
+  getLocationLngLat
 }

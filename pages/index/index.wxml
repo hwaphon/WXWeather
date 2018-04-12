@@ -6,13 +6,15 @@
       class='weather-navigation'
       style='margin-top: {{ statusBarHeight }}px'>
       <text>{{ weatherInfo.city }}</text>
-      <view class='weather-city' bindtap='selectCity'>
-        <image src='{{ locationIcon }}' class='weather-location-icon'></image>
-      </view>
+      <picker mode="region" bindchange='cityChange'>
+        <view class='weather-city'>
+          <image src='{{ locationIcon }}' class='weather-location-icon'></image>
+        </view>
+      </picker>
     </view>
     <view class='weather-info'>
-      <text class='info-wendu'>{{ weatherInfo.data.wendu }}</text>
-      <text class='info-type'>{{ weatherForecast[0].type }}</text>
+      <text class='info-wendu'>{{ weatherInfo.tmp }}</text>
+      <text class='info-type'>{{ weatherInfo.cond_text }}</text>
     </view>
     <image src='{{ bg }}' mode='aspectFill' class='weather-bg'></image>
   </view>

@@ -9,24 +9,31 @@ Page({
     statusBarHeight: 0,
     weatherInfo: {},
     weatherForecast: [],
-    locationIcon: Icon.LOCATION
+    locationIcon: Icon.LOCATION,
+    province: Map.PROVINCE
   },
   onLoad: function () {
-    let _this = this;
-    Location.
-      getLocationName().
-      then((res) => {
-        return res;
-      }).
-      then((res) => {
-        Weather.getWeather(res).then((res) => {
-          _this.setData({
-            weatherInfo: res,
-            weatherForecast: _this.formateData(res.data.forecast)
-          });
+    Location
+      .getLocation()
+      .then((res) => {
+        return { lng: res.longitude, lat: res.latitude };
+      })
+      .then((location) => {
+        return Weather.getNow(location);
+      })
+      .then((res) => {
+        let data = res.data.HeWeather6[0];
+        console.log(data);
+        this.setData({
+          weatherInfo: { 
+            tmp: data.now.tmp,
+            city: data.basic.parent_city,
+            cond_text: data.now.cond_txt
+          }
         });
       });
-
+      // 获取 statusbar 高度
+      let _this = this;
       wx.getSystemInfo({
         success: function(res) {
           _this.setData({
@@ -49,7 +56,26 @@ Page({
     }
     return result;
   },
-  selectCity: function () {
-    console.log('select');
+  cityChange: function (event) {
+    let address = event.detail.value.join('');
+    this.updateWeather(address);
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '简悦天气，提供简单的天气信息',
+      path: '/pages/index/index'
+    };
+  },
+  updateWeather: function (address) {
+    Location.getLocationLngLat(address)
+      .then((res) => {
+        return res;
+      })
+      .then((res) => {
+        return Weather.getForecast(res.result.location);
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
 });
