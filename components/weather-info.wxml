@@ -1,10 +1,10 @@
 <!--components/weather-info.wxml-->
 <view class='weather-info-item'>
-  <text class='weather-info-date'>{{ info.date }}</text>
+  <text class='weather-info-date'>{{ date }}</text>
   <view class='weather-info-more'>
-    <image src='{{ icon }}' mode='aspectFit' class='weather-info-icon'></image>
-    <text class='weather-info-high weather-info-wendu'>{{ info.high }}</text>
+    <image src='../assets/icon/{{ icon }}.png' mode='aspectFit' class='weather-info-icon'></image>
+    <text class='weather-info-high weather-info-wendu'>{{ tmp_max }}</text>
     <text class='weather-info-indicator'>/</text>
-    <text class='weather-info-low weather-info-wendu'>{{ info.low }}</text>
+    <text class='weather-info-low weather-info-wendu'>{{ tmp_min }}</text>
   </view>
 </view>

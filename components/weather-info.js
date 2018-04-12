@@ -1,5 +1,6 @@
 // components/weather-info.js
 const Icon = require('../assets/icon.js');
+const Util = require('../utils/utils.js');
 
 Component({
   /**
@@ -9,16 +10,12 @@ Component({
     info: {
       type: Object,
       observer: function (weather) {
-        let icon;
-        if (weather.type.includes('雨')) {
-          icon = Icon.RAINY;
-        } else if (weather.type.includes('阴')) {
-          icon = Icon.CLOUD;
-        } else {
-          icon = Icon.SUNNY;
-        }
+        console.log(weather);
         this.setData({
-          'icon': icon
+          icon: weather.cond_code_d,
+          date: this.formateDate(weather.date),
+          tmp_max: weather.tmp_max,
+          tmp_min: weather.tmp_min
         });
       }
     }
@@ -28,12 +25,15 @@ Component({
    * 组件的初始数据
    */
   data: {
-    icon: ''
+    icon: '999',
+    date: '',
+    tmp_max: 0,
+    tmp_min: 0
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
+    formateDate (dateStr) {
+      let date = new Date(dateStr);
+      return Util.getWeek(date.getDay());
+    }
   }
 })

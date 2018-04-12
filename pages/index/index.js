@@ -19,19 +19,8 @@ Page({
         return { lng: res.longitude, lat: res.latitude };
       })
       .then((location) => {
-        return Weather.getNow(location);
+        return this.updateWeather(location);
       })
-      .then((res) => {
-        let data = res.data.HeWeather6[0];
-        console.log(data);
-        this.setData({
-          weatherInfo: { 
-            tmp: data.now.tmp,
-            city: data.basic.parent_city,
-            cond_text: data.now.cond_txt
-          }
-        });
-      });
       // 获取 statusbar 高度
       let _this = this;
       wx.getSystemInfo({
@@ -41,20 +30,6 @@ Page({
           });
         },
       });
-  },
-  formateData: function (infos) {
-    let { length } = infos;
-    let result = [];
-    let reg = /\d+/g;
-    for (let i = 0; i < length; i++) {
-      result.push({
-        date: infos[i].date.slice(-3),
-        type: infos[i].type,
-        low: (infos[i].low.match(reg))[0],
-        high: (infos[i].high.match(reg))[0]
-      });
-    }
-    return result;
   },
   cityChange: function (event) {
     let address = event.detail.value.join('');
@@ -66,16 +41,26 @@ Page({
       path: '/pages/index/index'
     };
   },
-  updateWeather: function (address) {
-    Location.getLocationLngLat(address)
+  updateWeather: function (location) {
+    return Weather.getNow(location)
       .then((res) => {
-        return res;
+        let data = res.data.HeWeather6[0];
+        this.setData({
+          weatherInfo: {
+            tmp: data.now.tmp,
+            city: data.basic.parent_city,
+            cond_text: data.now.cond_txt
+          }
+        })
+      })
+      // 获取未来天气
+      .then(() => {
+        return Weather.getForecast(location);
       })
       .then((res) => {
-        return Weather.getForecast(res.result.location);
-      })
-      .then((res) => {
-        console.log(res);
+        this.setData({
+          weatherForecast: res.data.HeWeather6[0].daily_forecast
+        });
       });
   }
 });

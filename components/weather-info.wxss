@@ -23,8 +23,8 @@
 }
 
 .weather-info-icon {
-  height: 48rpx;
-  width: 48rpx;
+  height: 56rpx;
+  width: 56rpx;
   margin-right: 16rpx;
 }
 
