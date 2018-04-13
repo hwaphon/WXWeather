@@ -33,13 +33,24 @@ Page({
   },
   cityChange: function (event) {
     let address = event.detail.value.join('');
-    this.updateWeather(address);
+    Location
+      .getLocationLngLat(address)
+      .then((res) => {
+        let location = res.result.location;
+        return this.updateWeather(location);
+      });
   },
   onShareAppMessage: function () {
     return {
       title: '简悦天气，提供简单的天气信息',
       path: '/pages/index/index'
     };
+  },
+  formateAddress: function (basic) {
+    let address = basic.location;
+    let city = basic['parent_city'];
+    address = city ? city + ' ' + address : address;
+    return address;
   },
   updateWeather: function (location) {
     return Weather.getNow(location)
@@ -48,7 +59,7 @@ Page({
         this.setData({
           weatherInfo: {
             tmp: data.now.tmp,
-            city: data.basic.parent_city,
+            city: this.formateAddress(data.basic),
             cond_text: data.now.cond_txt
           }
         })

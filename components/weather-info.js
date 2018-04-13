@@ -10,7 +10,6 @@ Component({
     info: {
       type: Object,
       observer: function (weather) {
-        console.log(weather);
         this.setData({
           icon: weather.cond_code_d,
           date: this.formateDate(weather.date),
