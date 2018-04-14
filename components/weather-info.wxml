@@ -1,10 +1,31 @@
 <!--components/weather-info.wxml-->
-<view class='weather-info-item'>
-  <text class='weather-info-date'>{{ date }}</text>
-  <view class='weather-info-more'>
-    <image src='../assets/icon/{{ icon }}.png' mode='aspectFit' class='weather-info-icon'></image>
-    <text class='weather-info-high weather-info-wendu'>{{ tmp_max }}</text>
-    <text class='weather-info-indicator'>/</text>
-    <text class='weather-info-low weather-info-wendu'>{{ tmp_min }}</text>
+<view class='weather-info-item' bindtap='toggleCollapse'>
+  <view class='item' hover-class='item-hover' hover-stay-time='200'>
+    <text class='weather-info-date'>{{ date }}</text>
+    <view class='weather-info-more'>
+      <image src='../assets/icon/{{ icon }}.png' mode='aspectFit' class='weather-info-icon'></image>
+      <text class='weather-info-high weather-info-wendu'>{{ tmp_max }}</text>
+      <text class='weather-info-indicator'>/</text>
+      <text class='weather-info-low weather-info-wendu'>{{ tmp_min }}</text>
+    </view>
+  </view>
+  <view class='item-collapse' animation='{{animationData}}'>
+    <view class='other-info'>
+      <view class='other-item'>
+        <text class='item-sc'>{{ info.wind_sc }}</text>
+        <image src='../assets/icon/wind.png' class='item-icon' mode='aspectFit'></image>
+        <text class='item-static'>风力</text>
+      </view>
+      <view class='other-item'>
+        <text class='item-sc'>{{ info.uv_index }}</text>
+        <image src='../assets/icon/uv.png' class='item-icon' mode='aspectFit'></image>
+        <text class='item-static'>紫外线强度</text>
+      </view>
+      <view class='other-item'>
+        <text class='item-sc'>{{ info.hum }}</text>
+        <image src='../assets/icon/hum.png' class='item-icon' mode='aspectFit'></image>
+        <text class='item-static'>湿度</text>
+      </view>
+    </view>
   </view>
 </view>

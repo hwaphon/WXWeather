@@ -4,7 +4,7 @@
     <view 
       wx:if='{{ statusBarHeight > 0 }}'
       class='weather-navigation'
-      style='margin-top: {{ statusBarHeight }}px'>
+      style='top: {{ statusBarHeight }}px'>
       <text>{{ weatherInfo.city }}</text>
       <picker mode="region" bindchange='cityChange'>
         <view class='weather-city'>
@@ -18,9 +18,9 @@
     </view>
     <image src='{{ bg }}' mode='aspectFill' class='weather-bg'></image>
   </view>
-  <view class='weather-list'>
+  <scroll-view class='weather-list' scroll-y>
     <block wx:for='{{ weatherForecast }}' wx:key="index">
-      <weather-info info="{{ item }}"></weather-info>
+      <weather-info info="{{ item }}" bindCollapse="onCollapse"></weather-info>
     </block>
-  </view>
+  </scroll-view> 
 </view>

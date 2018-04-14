@@ -1,4 +1,15 @@
 /**index.wxss**/
+page {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+} 
 
 .weather-top {
   height: 700rpx;
@@ -24,7 +35,7 @@
   line-height: 96rpx;
   text-align: center;
   color: #FFF;
-  position: relative;
+  position: fixed;
 }
 
 .weather-info {
@@ -62,4 +73,9 @@
 .weather-location-icon {
   width: 48rpx;
   height: 48rpx;
+}
+
+.weather-list {
+  height: 200rpx;
+  flex: 1 1 auto;
 }
